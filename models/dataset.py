@@ -89,7 +89,7 @@ def create_FACE_Transform(mode, img_size):
 
 class FFHQAge(torch.utils.data.Dataset):
     def __init__(self, data_root, age_group=7, img_size=128, split='train', mode='train', transform=None):
-        label_file = '/home/zzhuang/DATASET/FFHQ/ffhq_aging_labels.csv'
+        label_file = 'data/ffhq_aging_labels.csv'
         self.img_list = create_FFHQ_AGING(data_root, label_file, age_group)
         if split == 'train':
             self.img_list = self.img_list[self.img_list[:, -1].astype(int) == 1]

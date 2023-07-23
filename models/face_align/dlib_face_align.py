@@ -14,19 +14,11 @@ import numpy as np
 from PIL import Image
 import cv2
 from skimage import transform as trans
-
-# base_path = os.path.abspath(os.path.dirname(__file__))
-# detection_path = f'{base_path}/dlib/mmod_human_face_detector.dat'
-# landmark5_path = f'{base_path}/dlib/shape_predictor_5_face_landmarks.dat'
-# face_detector = dlib.cnn_face_detection_model_v1(detection_path)
-# shape_predictor_5 = dlib.shape_predictor(landmark5_path)
-# template = np.load(f'{base_path}/dlib/FFHQ_template.npy')
-
 import dlib
+from scipy import ndimage
 
-base_path = '/home/zzhuang/NoisyGAN/zzhuang_ops/utils/face_align'
-detection_path = f'{base_path}/dlib/mmod_human_face_detector-4cb19393.dat'
-landmark5_path = f'{base_path}/dlib/shape_predictor_68_face_landmarks.dat'
+detection_path = 'data/dlib/mmod_human_face_detector-4cb19393.dat'
+landmark5_path = 'data/dlib/shape_predictor_68_face_landmarks.dat'
 face_detector = dlib.cnn_face_detection_model_v1(detection_path)
 shape_predictor_5 = dlib.shape_predictor(landmark5_path)
 
@@ -47,23 +39,6 @@ def detect_keypoints(input_img):
         shape = shape_predictor_5(input_img, det_face.rect)
         landmark = np.array([[part.x, part.y] for part in shape.parts()])
     return landmark
-
-
-# def face_alignment(image, output_size=112):
-#     _landmark = detect_keypoints(image)
-#     if _landmark is None:
-#         return None
-#     tform = trans.SimilarityTransform()
-#     t = template.copy()
-#     t *= output_size / 1024
-#     tform.estimate(_landmark, t)
-#     M = tform.params[0:2, :]
-#     aligned_img = cv2.warpAffine(image, M, (output_size, output_size))
-#     tform2 = trans.SimilarityTransform()
-#     tform2.estimate(t, _landmark)
-#     return aligned_img, tform2.params[0:2,:]
-
-from scipy import ndimage
 
 
 def face_alignment(img, output_size=1024):
