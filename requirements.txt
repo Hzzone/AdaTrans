@@ -1,0 +1,9 @@
+streamlit
+chardet
+matplotlib
+ninja
+dlib
+scikit-image==0.19.2
+pillow==9.2.0
+opencv-python
+tqdm

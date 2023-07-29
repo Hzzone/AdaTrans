@@ -17,7 +17,12 @@ Official code for `Adaptive Nonlinear Latent Transformation for Conditional Face
 
 # Training and Evaluation
 
-**Requirements**: PyTorch, `pip install streamlit pillow opencv-python tqdm`
+**Requirements**:
+```
+conda create -n adatrans python=3.9
+conda install pytorch==2.0.0 torchvision==0.15.0 torchaudio==2.0.0 pytorch-cuda=11.7 -c pytorch -c nvidia
+pip install -r requirements.txt
+```
 **Training data**: Download the datasets [FFHQ](https://github.com/NVlabs/ffhq-dataset) and [CelebA](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html). The age labels of FFHQ come from [here](https://github.com/royorel/Lifespan_Age_Transformation_Synthesis/tree/master), and can be downloaded from our links below. CelebA should be aligned like FFHQ, see https://github.com/NVlabs/ffhq-dataset/blob/master/download_ffhq.py
 
 **Training**: We provide the training code in `training`.
@@ -70,6 +75,8 @@ streamlit run webui/app.py
 We additionally support (1) Segmenting the faces to preserve the background (2) Paste to input images for in-the-wild editing (3) Showing the facial attributes. The first result is the reconstructed face by E4E encoder.
 
 Note that face align consumes the most costs in the current version~(dlib like FFHQ dataset). One may opt to MTCNN and so on for faster speed.
+
+2023.7.29: add support for CPU. I have tested on my mac. Using specified GPU device: `export CUDA_VISIBLE_DEVICES=DEVICE_INDEX`.
 
 **We appreciate for any citations or stars if you found this work is helpful**
 

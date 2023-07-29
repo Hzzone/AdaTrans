@@ -17,8 +17,8 @@ from torchvision.transforms.functional import to_pil_image, to_tensor
 
 torch.autograd.set_grad_enabled(False)
 
-sys.path.insert(0, '/home/zzhuang/AdaTrans')
-sys.path.insert(0, '/home/zzhuang/AdaTrans/models/stylegan2')
+sys.path.insert(0, '.')
+sys.path.insert(0, './models/stylegan2')
 
 from models.decoder import StyleGANDecoder
 from models.e4e.psp_encoders import Encoder4Editing
@@ -73,6 +73,7 @@ class Trans(object):
             stylegan2_checkpoint,
             start_from_latent_avg=False,
             output_size=256,
+            force_fp32=True,
         ).eval().to(device)
 
         encoder = Encoder4Editing(50, 'ir_se', stylegan_size=1024, checkpoint_path=e4e_checkpoint).eval().to(device)

@@ -13,6 +13,7 @@ class StyleGANDecoder(nn.Module):
                  start_from_latent_avg=True,
                  output_size=128,
                  downsampling=True,
+                 force_fp32=False,
                  ):
         super(StyleGANDecoder, self).__init__()
 
@@ -20,6 +21,7 @@ class StyleGANDecoder(nn.Module):
         # compute number of style inputs based on the output resolution
         self.start_from_latent_avg = start_from_latent_avg
         self.downsampling = downsampling
+        self.force_fp32 = force_fp32
 
         self.load_weights(stylegan_weights_path)
         self.style_dim = self.decoder.w_dim
@@ -33,6 +35,8 @@ class StyleGANDecoder(nn.Module):
         with dnnlib.util.open_url(stylegan_weights_path) as fp:
             ckpt = legacy.load_network_pkl(fp)
         self.decoder = ckpt['G_ema']  # type: ignore
+        if self.force_fp32:
+            self.decoder = self.decoder.float()
 
         if 'latent_avg' not in ckpt or 'principal_components' not in ckpt:
             print('compute avg...')
@@ -88,7 +92,7 @@ class StyleGANDecoder(nn.Module):
         if self.start_from_latent_avg:
             codes = codes + self.latent_avg
 
-        images = self.decoder.synthesis(codes, noise_mode='const')
+        images = self.decoder.synthesis(codes, noise_mode='const', force_fp32=self.force_fp32)
         if images.size(2) != self.output_size and self.downsampling:
             # images = F.interpolate(images, size=self.output_size, mode='bilinear', align_corners=True)
             from .ops import resize

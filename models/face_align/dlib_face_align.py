@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 '''
-@Project : NoisyGAN 
+@Project :  AdaTrans
 @File    : dlib_face_align.py
 @Author  : Zhizhong Huang from Fudan University
 @Homepage: https://hzzone.github.io/
@@ -17,8 +17,8 @@ from skimage import transform as trans
 import dlib
 from scipy import ndimage
 
-detection_path = 'data/dlib/mmod_human_face_detector-4cb19393.dat'
-landmark5_path = 'data/dlib/shape_predictor_68_face_landmarks.dat'
+detection_path = 'data/mmod_human_face_detector-4cb19393.dat'
+landmark5_path = 'data/shape_predictor_68_face_landmarks.dat'
 face_detector = dlib.cnn_face_detection_model_v1(detection_path)
 shape_predictor_5 = dlib.shape_predictor(landmark5_path)
 
