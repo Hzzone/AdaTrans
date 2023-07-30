@@ -17,8 +17,9 @@ from skimage import transform as trans
 import dlib
 from scipy import ndimage
 
-detection_path = 'data/mmod_human_face_detector-4cb19393.dat'
-landmark5_path = 'data/shape_predictor_68_face_landmarks.dat'
+root = os.path.dirname(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+detection_path = f'{root}/data/mmod_human_face_detector-4cb19393.dat'
+landmark5_path = f'{root}/data/shape_predictor_68_face_landmarks.dat'
 face_detector = dlib.cnn_face_detection_model_v1(detection_path)
 shape_predictor_5 = dlib.shape_predictor(landmark5_path)
 

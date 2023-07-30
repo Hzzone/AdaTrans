@@ -6,6 +6,8 @@ Official code for `Adaptive Nonlinear Latent Transformation for Conditional Face
 > https://arxiv.org/abs/2307.07790
 > Recent works for face editing usually manipulate the latent space of StyleGAN via the linear semantic directions. However, they usually suffer from the entanglement of facial attributes, need to tune the optimal editing strength, and are limited to binary attributes with strong supervision signals. This paper proposes a novel adaptive nonlinear latent transformation for disentangled and conditional face editing, termed AdaTrans. Specifically, our AdaTrans divides the manipulation process into several finer steps; i.e., the direction and size at each step are conditioned on both the facial attributes and the latent codes. In this way, AdaTrans describes an adaptive nonlinear transformation trajectory to manipulate the faces into target attributes while keeping other attributes unchanged. Then, AdaTrans leverages a predefined density model to constrain the learned trajectory in the distribution of latent codes by maximizing the likelihood of transformed latent code. Moreover, we also propose a disentangled learning strategy under a mutual information framework to eliminate the entanglement among attributes, which can further relax the need for labeled data. Consequently, AdaTrans enables a controllable face editing with the advantages of disentanglement, flexibility with non-binary attributes, and high fidelity. Extensive experimental results on various facial attributes demonstrate the qualitative and quantitative effectiveness of the proposed AdaTrans over existing state-of-the-art methods, especially in the most challenging scenarios with a large age gap and few labeled examples.
 
+**Open in colab** [![Explore in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Hzzone/AdaTrans/blob/master/jupyter_demo.ipynb)
+
 **If you found this code helps your work, do not hesitate to cite my paper or star this repo!**
 
 *example results*
@@ -63,6 +65,7 @@ Download all needed models, and put them into `data/`.
 The models include (1) attribute classifier (Resnet34 and Resnet50); (2) realnvp density model; (3) Face segmentation, E4E encoder, and official StyleGAN2 model; and (4) all train latent codes and predictions of FFHQ datasets (Do not download if you do not train your own model).
 
 # Demo
+**open in colab** [![Explore in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Hzzone/AdaTrans/blob/master/jupyter_demo.ipynb)
 
 The web ui demo looks like this:
 ![](data/demo.gif)
